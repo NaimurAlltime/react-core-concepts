@@ -84,7 +84,7 @@ function Users() {
     <div className="user-container">
        <h2>Users: {users.length} </h2>
        {
-        users.map(user => <UserName name={user.name}></UserName>)
+        users.map(user => <UserName name={user.name} email={user.email}></UserName>)
        }
     </div>
   );
@@ -94,6 +94,7 @@ function UserName(props) {
   return (
      <div className="user">
         <h4>Name: {props.name}</h4>
+        <p>Email: {props.email}</p>
      </div>
   );
 }
