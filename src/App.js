@@ -1,51 +1,56 @@
 import './App.css';
-import logo from './logo.svg';
 
-const Id = 2212081019;
-const info = {
-  name: "Naimur Rahman",
-  location: "Gazipur, Dhaka"
-}
+const informations = [
+  {name: 'Naimur Rahman', job: "Software Engineer", address: "Gazipur, Dhaka"},
+  {name: 'Sabbir Rahman', job: "Frontend Engineer", address: "Kaligonj, Dhaka"},
+  {name: 'Abir Islam', job: "Backend Engineer", address: "Kisorgonj, Dhaka"}
+];
 
-const infoStyle = {
-  color: 'white',
-  backgroundColor: 'green',
-  padding: '7px',
-  borderRadius: '5px'
-}
+const friends = [
+  {name: 'Kader Jilani', phone: '01925234527'},
+  {name: 'Kashem Islam', phone: '01925234524'},
+  {name: 'Nibir Bishas', phone: '01923234523'},
+];
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>JSX</h1>
-         <div className="container">
-             My first React Project!
-         </div>
-         <h3>Id: {Id}</h3>
-         <div className="info">
-           <h3 style={infoStyle}>
-             Name: {info.name}
-           </h3>
-            <h4 style={{ color: 'blue', backgroundColor: 'white', borderRadius: '5px'}}>
-              Location: {info.location}
-            </h4>
-         </div>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+       <h2>First Components</h2>
+       {
+        informations.map(information => <Person name={information.name} job={information.job} address={information.address}></Person>)
+       }
+       {/* <Person name="Naimur Rahman" job="Software Engineer"></Person>
+       <Person name="Akash Ahammed" job="Web-development"></Person> */}
+       <h2>Second Component</h2>
+       {
+        friends.map(friend => <FriendInfo name={friend.name} phone={friend.phone}></FriendInfo>)
+       }
+       {/* <FriendInfo name="Tuhin Ahammed" phone="01923456243"></FriendInfo>
+       <FriendInfo name="Rajib Bishas" phone="014256723243"></FriendInfo> */}
     </div>
   );
+}
+
+function Person(props) {
+  // console.log(props)
+  return (
+    <div className="container">
+       <h1>Name: {props.name} </h1>
+       <h3>Job: {props.job}</h3>
+       <h3>Address: {props.address}</h3>
+    </div>
+  );
+}
+
+function FriendInfo(props) {
+  // console.log(props)
+   return (
+     <div className="friendInfo">
+        <h2>Name: {props.name} </h2>
+        <h4>Phone: {props.phone} </h4>
+     </div>
+   );
 }
 
 export default App;
