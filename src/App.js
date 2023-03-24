@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 
 const informations = [
@@ -15,6 +16,10 @@ const friends = [
 function App() {
   return (
     <div className="App">
+      <h2>Dynamic Api Load with useState and useEffect</h2>
+      <Users></Users>
+      <h2>UseState</h2>
+      <Counter></Counter>
 
        <h2>First Components</h2>
        {
@@ -51,6 +56,46 @@ function FriendInfo(props) {
         <h4>Phone: {props.phone} </h4>
      </div>
    );
+}
+
+function Counter() {
+  const [count, setCount] = useState(25)
+  const increaseCount = () => setCount(count + 1)
+  const decreaseCount = () => setCount(count - 1)
+  return (
+     <div className="counter">
+         <h2>Counter: {count} </h2>
+         <button onClick={decreaseCount}>Decrease </button>
+         <button onClick={increaseCount}>Increase</button>
+     </div>
+  );
+}
+
+function Users() {
+  const [users, setUsers] = useState([]);
+  // useEffect(()=>{}, [])
+  useEffect(() => {
+     fetch('https://jsonplaceholder.typicode.com/users')
+     .then(res => res.json())
+     .then(data => setUsers(data));
+  }, [])
+
+  return (
+    <div className="user-container">
+       <h2>Users: {users.length} </h2>
+       {
+        users.map(user => <UserName name={user.name}></UserName>)
+       }
+    </div>
+  );
+}
+
+function UserName(props) {
+  return (
+     <div className="user">
+        <h4>Name: {props.name}</h4>
+     </div>
+  );
 }
 
 export default App;
